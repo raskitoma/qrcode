@@ -4,6 +4,8 @@
 
 I just added some beautification to it, also allowing to run on ARM (I'm running it in a raspberry pi). Separated most things to proper locations and to compile with any possible coding and security standards.
 
+[![Quality Gate Status](https://sonarqube.raskitoma.com/api/project_badges/measure?project=Raskitoma-QRCode&metric=alert_status&token=b4ca8538f7ad1410ec61c5ee446644e0186a07f0)](https://sonarqube.raskitoma.com/dashboard?id=Raskitoma-QRCode)
+
 ![Screenshot](qrcoderun.png)
 
 ## Running locally

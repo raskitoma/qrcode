@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request
 from qrcoderesponse import qrcoderesponse
 
 app = Flask(__name__,
             static_url_path='',
             static_folder="static",
             template_folder="templates")  
+
+csrf = CSRF
 
 
 @app.route("/")
