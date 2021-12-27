@@ -1,0 +1,17 @@
+
+.headmaster {
+    background: url('/img/bg-pattern.png'), linear-gradient(to left, #7b4397, #dc2430);
+    padding: 5px 0px 5px;
+}
+
+.devicefull {
+    background-image:url('/img/iphone_6_plus_white_port.png');
+}
+
+.qrtexting {
+    width: 400px;
+    padding: 5px 15px 5px 15px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    margin-left: 20px;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - QRCode Generator</title>
+    <meta name="description" content="Simple QRCode generator!">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli" crossorigin="anonymous">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/qr.css">
+</head>
+
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="5">
+    <header class="masthead headmaster">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-5 my-auto">
+                    <form>
+                        <label for="qrtext">
+                            QRCode contents:
+                          </label>
+
+                          <textarea class="form-control qrtexting" id="qrtext" placeholder="...enter text for QRCode!"></textarea>
+                    </form>
+                    <div class="device-container"></div>
+                    <div class="iphone-mockup"></div>
+                </div>
+                <div class="col-lg-5 my-auto">
+                    <div class="device-container">
+                        <div class="device-mockup iphone6_plus portrait white">
+                            <div class="device devicefull">
+                                <div class="screen"><img class="img-fluid d-flex justify-content-center align-items-center mx-auto qrcode" width="400px" height="auto" alt="Here's your QRCode!" id="qrcodeimg"></div>
+                                <div class="button"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <footer>
+        <div class="container">
+            <p>©&nbsp;Raskitoma 2021. All Rights Reserved.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="https://github.com/DietPawel/pwscapp">DietPawel Source</a></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="https://raskitoma.com/politica-de-privacidad-y-otras-cuestiones-legales/">Privacy and other legal crap</a></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="https://raskitoma.com">Raskitoma.com</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/new-age.js"></script>
+    <script>
+        var qrimg = document.getElementById('qrcodeimg');
+        var qrtxt = document.getElementById('qrtext');
+        function fetchcode(){
+          qrimg.src = '/qr?text='+qrtxt.value;
+          console.log(qrimg.src);
+        }
+        qrtxt.onkeyup = fetchcode;
+        fetchcode();
+      </script>  
+</body>
+</html>
