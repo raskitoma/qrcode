@@ -1,5 +1,7 @@
 # Simple QRCode generator
 
+> This is a mod from [DietPawel/pwscapp: Simple QR code generator](https://github.com/DietPawel/pwscapp)
+
 ![Screenshot](qrcoderun.png)
 
 ## Running locally
@@ -33,4 +35,3 @@ docker-compose up -d
 Browse to `http://<qrcode host>:<port>`. The default should be 3000, but for the current docker-compose.yml file it is 8060.
 
 > This is a mod from [DietPawel/pwscapp: Simple QR code generator](https://github.com/DietPawel/pwscapp)
-> {.is-info}
