@@ -2,6 +2,8 @@
 
 > This is a mod from [DietPawel/pwscapp: Simple QR code generator](https://github.com/DietPawel/pwscapp)
 
+I just added some beautification to it, also allowing to run on ARM (I'm running it in a raspberry pi). Separated most things to proper locations and to compile with any possible coding and security standards.
+
 ![Screenshot](qrcoderun.png)
 
 ## Running locally
