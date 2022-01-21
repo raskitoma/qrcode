@@ -6,7 +6,9 @@ I just added some beautification to it, also allowing to run on ARM (I'm running
 
 ## Code Quality
 
-[![Quality Gate Status](https://sonarqube.raskitoma.com/api/project_badges/measure?project=Raskitoma-QRCode&metric=alert_status&token=b4ca8538f7ad1410ec61c5ee446644e0186a07f0)](https://sonarqube.raskitoma.com/dashboard?id=Raskitoma-QRCode)
+[![Quality gate](https://sonarqube.raskitoma.com/api/project_badges/quality_gate?project=Raskitoma-QRCode&token=b4ca8538f7ad1410ec61c5ee446644e0186a07f0)](https://sonarqube.raskitoma.com/dashboard?id=Raskitoma-QRCode)
+
+## Screenshot
 
 ![Screenshot](qrcoderun.png)
 
