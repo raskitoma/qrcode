@@ -6,9 +6,6 @@ app = Flask(__name__,
             static_folder="static",
             template_folder="templates")  
 
-csrf = CSRF
-
-
 @app.route("/")
 def show_form():
   return render_template('index.html')
