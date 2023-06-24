@@ -21,10 +21,10 @@ if os.getenv("PIXEL_WIDTH"):
     pass
 
 def imagetoresponse(img):
-  file = io.BytesIO()
-  img.save(file, format="PNG")
-  file.seek(0)
-  return send_file(file, mimetype="image/png")
+  img_file = io.BytesIO()
+  img.save(img_file, format="PNG")
+  img_file.seek(0)
+  return send_file(img_file, mimetype="image/png")
 
 def makeqrcode(text):
   qr = qrcode.QRCode(
