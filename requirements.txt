@@ -8,4 +8,4 @@ uWSGI==2.0.21
 Pillow==10.0.1
 uWSGI==2.0.22
 Pillow==9.3.0
-Werkzeug==3.0.1
+Werkzeug==3.1.6
