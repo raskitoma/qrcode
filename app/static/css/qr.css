@@ -1,17 +1,68 @@
-
 .headmaster {
     background: url('/img/bg-pattern.png'), linear-gradient(to left, #7b4397, #dc2430);
-    padding: 5px 0px 5px;
+    padding: 5px 0 5px;
 }
 
 .devicefull {
-    background-image:url('/img/iphone_6_plus_white_port.png');
+    background-image: url('/img/iphone_6_plus_white_port.png');
 }
 
-.qrtexting {
+.qrtexting,
+.qr-input {
     width: 400px;
-    padding: 5px 15px 5px 15px;
+    padding: 5px 15px;
     margin-bottom: 15px;
     margin-right: 20px;
     margin-left: 20px;
+}
+
+.form-label {
+    margin-left: 20px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.logo-slider-wrap {
+    width: 400px;
+    margin: 0 20px 15px;
+    color: #ffffff;
+}
+
+.logo-slider-wrap span {
+    display: inline-block;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+.qr-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 460px;
+}
+
+.qrcode {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.qr-placeholder {
+    width: 100%;
+    text-align: center;
+    color: #666666;
+}
+
+.qr-placeholder-box {
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 12px;
+    border-radius: 18px;
+    border: 2px dashed #dddddd;
+    background: #ffffff;
+}
+
+.qr-placeholder p {
+    font-size: 1rem;
+    font-weight: 600;
 }
