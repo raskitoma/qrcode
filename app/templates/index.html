@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Raskitoma QR - Premium QR Generator</title>
-    <meta name="description" content="Sleek and powerful QR Code generator with logo support.">
+    <title>QR Code Generator</title>
+    <meta name="description" content="Generate high-quality, professional QR codes with custom logos.">
     <link rel="icon" href="/favicon.svg?v=1" type="image/svg+xml">
     
     <!-- Typography -->
@@ -12,26 +12,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/css/qr.css">
+    <link rel="stylesheet" href="/css/qr.css?v=1.1">
 </head>
 
 <body id="page-top">
+    <!-- Animated Background -->
+    <canvas id="bg-canvas"></canvas>
+
     <header>
         <div class="logo-container">
-            <img src="/img/rask_logo-white.svg" alt="Raskitoma" class="logo" id="header-logo">
+            <img src="{{ logo_dark }}" 
+                 data-dark="{{ logo_dark }}" 
+                 data-light="{{ logo_light }}" 
+                 alt="QR Code Generator" class="logo" id="header-logo">
         </div>
         <div class="nav-actions">
+            <a href="https://github.com/raskitoma/qrcode" target="_blank" class="icon-btn github-link" aria-label="GitHub Repository">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
             <select id="lang-select" class="lang-select">
                 <option value="en">English</option>
                 <option value="es">Español (Latam)</option>
             </select>
-            <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
-                <i data-lucide="sun" id="theme-icon-light" class="d-none"></i>
-                <i data-lucide="moon" id="theme-icon-dark"></i>
+            <button id="theme-toggle" class="icon-btn theme-toggle-btn" aria-label="Toggle theme">
+                <svg id="theme-icon-light" class="d-none" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
         </div>
     </header>
@@ -39,8 +45,8 @@
     <main>
         <div class="app-container">
             <section class="hero-text fade-in">
-                <div class="form-card">
-                    <h1 id="t-title">Generate QR</h1>
+                <div class="form-card crystal">
+                    <h1 id="t-title">QR Code Generator</h1>
                     <p id="t-subtitle">Create custom QR codes with your brand logo in seconds.</p>
                     
                     <form id="qr-form">
@@ -49,22 +55,43 @@
                             <input type="text" id="qrtext" name="text" placeholder="https://raskitoma.com" autocomplete="off">
                         </div>
 
+                        <!-- Advanced Styling -->
+                        <div class="styling-grid">
+                            <div class="input-group">
+                                <label id="t-label-fg">Color</label>
+                                <input type="color" id="fg_color" name="fg_color" value="#000000" class="color-picker">
+                            </div>
+                            <div class="input-group">
+                                <label id="t-label-bg">Background</label>
+                                <input type="color" id="bg_color" name="bg_color" value="#ffffff" class="color-picker">
+                            </div>
+                        </div>
+
                         <div class="input-group">
-                            <label id="t-label-logo">Logo (optional)</label>
-                            <div class="file-input-wrapper">
+                            <label id="t-label-shape">Shape Style</label>
+                            <div class="style-selector">
+                                <label><input type="radio" name="drawer" value="square" checked> <span id="t-opt-square">Square</span></label>
+                                <label><input type="radio" name="drawer" value="rounded"> <span id="t-opt-rounded">Rounded</span></label>
+                                <label><input type="radio" name="drawer" value="circle"> <span id="t-opt-circle">Circle</span></label>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label id="t-label-logo">Logo (Drop here)</label>
+                            <div class="file-input-wrapper drop-zone" id="logo-drop-zone">
                                 <label for="logo" class="custom-file-upload" id="t-upload-label">
-                                    <i data-lucide="upload-cloud" style="vertical-align: middle; margin-right: 8px;"></i>
-                                    <span id="t-upload-text">Choose image...</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                    <span id="t-upload-text" style="display:block">Choose or Drop image...</span>
                                 </label>
                                 <input type="file" id="logo" name="logo" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
                             </div>
                         </div>
 
                         <div class="input-group">
-                            <label for="logo_scale" id="t-label-size">Logo Size</label>
+                            <label for="logo_scale" id="t-label-size">Logo Size (max 15%)</label>
                             <div class="slider-container">
-                                <input type="range" id="logo_scale" name="logo_scale" min="5" max="30" step="1" value="20">
-                                <span class="value-badge" id="logo-scale-value">20%</span>
+                                <input type="range" id="logo_scale" name="logo_scale" min="5" max="15" step="1" value="12">
+                                <span class="value-badge" id="logo-scale-value">12%</span>
                             </div>
                         </div>
                     </form>
@@ -72,10 +99,10 @@
             </section>
 
             <section class="preview-section fade-in" style="animation-delay: 0.1s;">
-                <div class="qr-container" id="qr-container">
+                <div class="qr-container crystal" id="qr-container">
                     <div id="qr-placeholder" class="qr-placeholder">
                         <div class="placeholder-icon">
-                            <i data-lucide="qr-code" style="width: 100%; height: 100%;"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><line x1="7" y1="7" x2="7" y2="7"></line><line x1="17" y1="7" x2="17" y2="7"></line><line x1="17" y1="17" x2="17" y2="17"></line><line x1="7" y1="17" x2="7" y2="17"></line></svg>
                         </div>
                         <p id="t-placeholder">Waiting for content...</p>
                     </div>
@@ -85,18 +112,16 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; <span id="current-year"></span> Raskitoma. <span id="t-rights">All Rights Reserved.</span></p>
-        <div class="footer-links">
-            <a href="https://raskitoma.com" target="_blank">raskitoma.com</a>
-        </div>
+    <footer class="footer-slim">
+        <p>
+            <a href="https://raskitoma.com" target="_blank" class="copyright-link">
+                &copy; <span id="current-year"></span> Raskitoma.
+            </a> 
+            <span id="t-rights">All Rights Reserved.</span>
+        </p>
     </footer>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
+    <script src="/js/app.js?v=2"></script>
 </body>
 </html>

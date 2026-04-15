@@ -1,53 +1,75 @@
-# Simple QRCode generator
+# QR Code Generator
 
-> This is a mod from [DietPawel/pwscapp: Simple QR code generator](https://github.com/DietPawel/pwscapp)
+A professional, high-performance web application to generate high-quality QR codes with custom styling and branding.
 
-I added some visual cleanup, ARM-friendly runtime support, and a simple deployment path for a Raspberry Pi/home server setup.
+![QR Code Generator Interface](qrcoderun.png)
 
-## Code Quality
+## ✨ Features
 
-SonarQube project: `Raskitoma-QRCode`
+- **Modern Interface**: A clean, premium design with support for both Dark and Light themes.
+- **Advanced QR Customization**: Generate QR codes with unique module shapes (Rounded, Dots, Circle) and custom eye (finder) patterns.
+- **Seamless Branding**: Easily embed logos into the center of your QR codes. Supported formats include PNG, JPEG, WebP, GIF, and SVG.
+- **Color Control**: Full customization of QR foreground and background colors.
+- **Scan-Safe Scaling**: Automatic logo scaling limits (max 15%) to ensure your QR codes remain scannable on all devices.
+- **Multilingual Support**: Fully localized in English and Spanish (Latin American).
+- **Responsive Layout**: Optimized for both desktop and mobile devices.
 
-> The previous README exposed a badge URL containing a token parameter. That token reference was removed.
+## 🐳 Docker Hub
 
-## Screenshot
-
-![Screenshot](qrcoderun.png)
-
-## Running locally
-
+The official image is available for multiple architectures:
 ```bash
-git clone https://github.com/raskitoma/qrcode.git
-cd qrcode
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-cd app
-uwsgi --ini uwsgi.ini
+docker pull raskitoma/qrcode:latest
 ```
 
-By default it runs on `0.0.0.0:3000`.
+## 🚀 Quick Start (Docker)
 
-## Run in Docker
+The application is fully containerized and easy to deploy.
 
-Edit `docker-compose.yml` as needed (ports, env vars, etc.), then:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/raskitoma/qrcode.git
+   cd qrcode
+   ```
 
-```bash
-docker compose build
-docker compose up -d
-```
+2. **Deploy with Script**:
+   We provide a convenient deployment script that pulls the official image (or builds locally if needed), initializes your environment (`.env`), and starts the service:
+   ```bash
+   chmod +x deploy.sh
+   ./deploy.sh
+   ```
 
-Browse to `http://<qrcode-host>:<port>`. In the current compose file, the exposed port is `8060`.
+3. **Alternative Manual Deploy**:
+   If you prefer to configure settings manually before starting:
+   ```bash
+   cp .env.sample .env
+   # Edit .env to your liking
+   docker compose up -d --build
+   ```
 
-## Validation rules
+The application will be available at `http://localhost:8060` by default.
 
-The `/qr` endpoint now rejects:
-- missing `text`
-- empty/blank `text`
-- text longer than `2048` characters
+## 💻 Multi-Arch Support
 
-## Tests
+This project is built using a Debian-based slim image to ensure maximum reliability and performance across different processor architectures. It is fully compatible with:
+- **x86_64 / AMD64** (Standard Desktop/Server)
+- **ARM64 / AArch64** (AWS Graviton, Apple Silicon M1/M2/M3, Raspberry Pi 4+)
 
-```bash
-python3 -m unittest discover -s tests -v
-```
+## ⚙️ Configuration
+
+Customize your deployment in the `.env` file:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `HOST_PORT` | Port on the host machine | `8060` |
+| `PIXEL_WIDTH` | Export resolution (higher = sharper) | `20` |
+| `FG_COLOR` | Default QR color | `#000000` |
+| `BG_COLOR` | Default background color | `#ffffff` |
+
+## 🛠️ Tech Stack
+
+- **Backend**: Python 3.12, Flask, Pillow, qrcode
+- **Frontend**: Vanilla JS (ES6+), Modern CSS3 (Grid/Flex)
+- **Container**: Docker + Docker Compose
+
+---
+Developed by [Raskitoma](https://raskitoma.com)
