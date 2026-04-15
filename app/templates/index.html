@@ -1,123 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - QRCode Generator</title>
-    <meta name="description" content="Simple QRCode generator!">
+    <title>Raskitoma QR - Premium QR Generator</title>
+    <meta name="description" content="Sleek and powerful QR Code generator with logo support.">
     <link rel="icon" href="/favicon.svg?v=1" type="image/svg+xml">
-    <link rel="shortcut icon" href="/favicon.svg?v=1" type="image/svg+xml">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli" crossorigin="anonymous">
-    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="/css/qr.css">
 </head>
 
-<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="5">
-    <header class="masthead headmaster">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center justify-content-center">
-                <div class="col-lg-5 my-auto">
-                    <form id="qr-form" enctype="multipart/form-data">
-                        <label for="qrtext">QRCode contents:</label>
-                        <input class="form-control qrtexting" type="text" id="qrtext" name="text" placeholder="https://raskitoma.com">
+<body id="page-top">
+    <header>
+        <div class="logo-container">
+            <img src="/img/rask_logo-white.svg" alt="Raskitoma" class="logo" id="header-logo">
+        </div>
+        <div class="nav-actions">
+            <select id="lang-select" class="lang-select">
+                <option value="en">English</option>
+                <option value="es">Español (Latam)</option>
+            </select>
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+                <i data-lucide="sun" id="theme-icon-light" class="d-none"></i>
+                <i data-lucide="moon" id="theme-icon-dark"></i>
+            </button>
+        </div>
+    </header>
 
-                        <label class="form-label mt-3" for="logo">Logo (optional):</label>
-                        <input class="form-control qr-input" type="file" id="logo" name="logo" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
+    <main>
+        <div class="app-container">
+            <section class="hero-text fade-in">
+                <div class="form-card">
+                    <h1 id="t-title">Generate QR</h1>
+                    <p id="t-subtitle">Create custom QR codes with your brand logo in seconds.</p>
+                    
+                    <form id="qr-form">
+                        <div class="input-group">
+                            <label for="qrtext" id="t-label-text">QR Content</label>
+                            <input type="text" id="qrtext" name="text" placeholder="https://raskitoma.com" autocomplete="off">
+                        </div>
 
-                        <label class="form-label mt-3" for="logo_scale">Logo size:</label>
-                        <div class="logo-slider-wrap">
-                            <input class="form-range" type="range" id="logo_scale" name="logo_scale" min="5" max="30" step="1" value="20">
-                            <span id="logo-scale-value">20%</span>
+                        <div class="input-group">
+                            <label id="t-label-logo">Logo (optional)</label>
+                            <div class="file-input-wrapper">
+                                <label for="logo" class="custom-file-upload" id="t-upload-label">
+                                    <i data-lucide="upload-cloud" style="vertical-align: middle; margin-right: 8px;"></i>
+                                    <span id="t-upload-text">Choose image...</span>
+                                </label>
+                                <input type="file" id="logo" name="logo" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="logo_scale" id="t-label-size">Logo Size</label>
+                            <div class="slider-container">
+                                <input type="range" id="logo_scale" name="logo_scale" min="5" max="30" step="1" value="20">
+                                <span class="value-badge" id="logo-scale-value">20%</span>
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-5 my-auto">
-                    <div class="device-container">
-                        <div class="device-mockup iphone6_plus portrait white">
-                            <div class="device devicefull">
-                                <div class="screen qr-screen">
-                                    <div class="qr-placeholder" id="qrplaceholder">
-                                        <div class="qr-placeholder-box"></div>
-                                        <p>Enter text to generate QR</p>
-                                    </div>
-                                    <img class="img-fluid d-flex justify-content-center align-items-center mx-auto qrcode d-none" width="400" height="auto" alt="Here's your QRCode!" id="qrcodeimg">
-                                </div>
-                                <div class="button"></div>
-                            </div>
+            </section>
+
+            <section class="preview-section fade-in" style="animation-delay: 0.1s;">
+                <div class="qr-container" id="qr-container">
+                    <div id="qr-placeholder" class="qr-placeholder">
+                        <div class="placeholder-icon">
+                            <i data-lucide="qr-code" style="width: 100%; height: 100%;"></i>
                         </div>
+                        <p id="t-placeholder">Waiting for content...</p>
                     </div>
+                    <img id="qrcodeimg" class="d-none" alt="Generated QR Code">
                 </div>
-            </div>
+            </section>
         </div>
-    </header>
+    </main>
+
     <footer>
-        <div class="container">
-            <p>©&nbsp;Raskitoma 2023. All Rights Reserved.</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="https://raskitoma.com">Raskitoma.com</a></li>
-            </ul>
+        <p>&copy; <span id="current-year"></span> Raskitoma. <span id="t-rights">All Rights Reserved.</span></p>
+        <div class="footer-links">
+            <a href="https://raskitoma.com" target="_blank">raskitoma.com</a>
         </div>
     </footer>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/js/new-age.js"></script>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
     <script>
-        const qrimg = document.getElementById('qrcodeimg');
-        const qrtxt = document.getElementById('qrtext');
-        const logoInput = document.getElementById('logo');
-        const logoScale = document.getElementById('logo_scale');
-        const logoScaleValue = document.getElementById('logo-scale-value');
-        const placeholder = document.getElementById('qrplaceholder');
-
-        function showPlaceholder() {
-            qrimg.classList.add('d-none');
-            qrimg.removeAttribute('src');
-            placeholder.classList.remove('d-none');
-        }
-
-        async function fetchcode() {
-            const text = qrtxt.value.trim();
-            logoScaleValue.textContent = `${logoScale.value}%`;
-
-            if (!text) {
-                showPlaceholder();
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('text', text);
-            formData.append('logo_scale', logoScale.value);
-            if (logoInput.files[0]) {
-                formData.append('logo', logoInput.files[0]);
-            }
-
-            try {
-                const response = await fetch('/qr', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    showPlaceholder();
-                    return;
-                }
-
-                const blob = await response.blob();
-                const imageUrl = URL.createObjectURL(blob);
-                qrimg.src = imageUrl;
-                qrimg.classList.remove('d-none');
-                placeholder.classList.add('d-none');
-            } catch (error) {
-                showPlaceholder();
-            }
-        }
-
-        qrtxt.addEventListener('input', fetchcode);
-        logoInput.addEventListener('change', fetchcode);
-        logoScale.addEventListener('input', fetchcode);
-        showPlaceholder();
-      </script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
