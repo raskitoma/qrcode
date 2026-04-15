@@ -11,9 +11,15 @@ DEFAULT_FG_COLOR = "#000000"
 DEFAULT_BG_COLOR = "#ffffff"
 MIN_PIXEL_WIDTH = 1
 MAX_PIXEL_WIDTH = 100
+<<<<<<< Updated upstream
 DEFAULT_LOGO_SCALE = 20
 MIN_LOGO_SCALE = 5
 MAX_LOGO_SCALE = 30
+=======
+DEFAULT_LOGO_SCALE = 15
+MIN_LOGO_SCALE = 5
+MAX_LOGO_SCALE = 20
+>>>>>>> Stashed changes
 
 
 def _pixel_width_from_env():

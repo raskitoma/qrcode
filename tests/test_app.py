@@ -8,6 +8,7 @@ if APP_DIR not in sys.path:
     sys.path.insert(0, APP_DIR)
 
 from main import app  # noqa: E402
+from qrcoderesponse import DEFAULT_LOGO_SCALE, MAX_LOGO_SCALE, _normalized_logo_scale  # noqa: E402
 
 
 class QRCodeAppTestCase(unittest.TestCase):
@@ -40,6 +41,12 @@ class QRCodeAppTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.mimetype, "image/png")
         self.assertTrue(response.data.startswith(b"\x89PNG"))
+
+    def test_logo_scale_is_clamped_to_maximum(self):
+        self.assertEqual(_normalized_logo_scale("999"), MAX_LOGO_SCALE)
+
+    def test_logo_scale_uses_new_default(self):
+        self.assertEqual(_normalized_logo_scale(None), DEFAULT_LOGO_SCALE)
 
 
 if __name__ == "__main__":
