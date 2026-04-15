@@ -3,13 +3,13 @@ FROM python:3.12-alpine
 ADD requirements.txt /
 
 RUN apk add --no-cache gcc libc-dev linux-headers zlib-dev jpeg-dev \
- && pip install --no-cache-dir --upgrade pip \
- && pip install --no-cache-dir -r /requirements.txt \
- && rm /requirements.txt
+    && pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r /requirements.txt \
+    && rm /requirements.txt
 
 ADD app /app/
 WORKDIR /app
 
-EXPOSE 3000/tcp
+EXPOSE 3000
 
-CMD ["uwsgi", "--ini", "uwsgi.ini"]
+CMD ["gunicorn", "--bind", "0.0.0.0:3000", "main:app"]
