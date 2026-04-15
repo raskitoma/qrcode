@@ -1,37 +1,69 @@
-.headmaster {
-    background: url('/img/bg-pattern.png'), linear-gradient(to left, #7b4397, #dc2430);
-    padding: 5px 0 5px;
+html, body {
+    min-height: 100%;
 }
 
-.devicefull {
-    background-image: url('/img/iphone_6_plus_white_port.png');
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, #dc2430 0%, #7b4397 100%);
+    color: #ffffff;
+}
+
+.masthead,
+.headmaster {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #dc2430 0%, #7b4397 100%);
+    padding: 60px 0;
+}
+
+.masthead .container {
+    min-height: 100%;
+}
+
+#qr-form {
+    max-width: 420px;
+}
+
+.qrtexting,
+.qr-input,
+.logo-slider-wrap {
+    width: 100%;
 }
 
 .qrtexting,
 .qr-input {
-    width: 400px;
-    padding: 5px 15px;
-    margin-bottom: 15px;
-    margin-right: 20px;
-    margin-left: 20px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    border-radius: 8px;
 }
 
-.form-label {
-    margin-left: 20px;
+.form-label,
+#qr-form label {
     color: #ffffff;
     font-weight: 600;
 }
 
 .logo-slider-wrap {
-    width: 400px;
-    margin: 0 20px 15px;
+    margin-bottom: 18px;
     color: #ffffff;
 }
 
 .logo-slider-wrap span {
     display: inline-block;
-    margin-top: 6px;
+    margin-top: 8px;
     font-weight: 600;
+}
+
+.device-container {
+    margin-top: 32px;
+}
+
+.devicefull {
+    background-image: url('/img/iphone_6_plus_white_port.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .qr-screen {
@@ -39,26 +71,32 @@
     align-items: center;
     justify-content: center;
     min-height: 460px;
+    padding: 20px;
+    background: #111111;
+    border-radius: 28px;
 }
 
 .qrcode {
     max-width: 100%;
     max-height: 400px;
     object-fit: contain;
+    background: #ffffff;
+    padding: 14px;
+    border-radius: 22px;
 }
 
 .qr-placeholder {
     width: 100%;
     text-align: center;
-    color: #666666;
+    color: #cccccc;
 }
 
 .qr-placeholder-box {
     width: 260px;
     height: 260px;
-    margin: 0 auto 12px;
+    margin: 0 auto 16px;
     border-radius: 18px;
-    border: 2px dashed #dddddd;
+    border: 2px dashed rgba(255,255,255,0.35);
     background: #ffffff;
 }
 
@@ -66,3 +104,24 @@
     font-size: 1rem;
     font-weight: 600;
 }
+
+footer {
+    padding: 22px 0;
+    background: rgba(0, 0, 0, 0.25);
+    color: rgba(255, 255, 255, 0.78);
+}
+
+footer p,
+footer a {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+footer a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer .list-inline {
+    margin-bottom: 0;
+}
+

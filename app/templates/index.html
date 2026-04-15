@@ -22,26 +22,17 @@
                 <div class="col-lg-5 my-auto">
                     <form id="qr-form" enctype="multipart/form-data">
                         <label for="qrtext">QRCode contents:</label>
-                        <textarea class="form-control qrtexting" id="qrtext" name="text" placeholder="...enter text for QRCode!"></textarea>
+                        <input class="form-control qrtexting" type="text" id="qrtext" name="text" placeholder="https://raskitoma.com">
 
                         <label class="form-label mt-3" for="logo">Logo (optional):</label>
                         <input class="form-control qr-input" type="file" id="logo" name="logo" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
 
                         <label class="form-label mt-3" for="logo_scale">Logo size:</label>
                         <div class="logo-slider-wrap">
-<<<<<<< Updated upstream
                             <input class="form-range" type="range" id="logo_scale" name="logo_scale" min="5" max="30" step="1" value="20">
                             <span id="logo-scale-value">20%</span>
                         </div>
-=======
-                            <input class="form-range" type="range" id="logo_scale" name="logo_scale" min="5" max="20" step="1" value="15">
-                            <span id="logo-scale-value">15%</span>
-                        </div>
-                        <small class="text-light d-block mt-2">For scan reliability, logo size is capped at 20%.</small>
->>>>>>> Stashed changes
                     </form>
-                    <div class="device-container"></div>
-                    <div class="iphone-mockup"></div>
                 </div>
                 <div class="col-lg-5 my-auto">
                     <div class="device-container">
