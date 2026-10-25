@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentTheme = localStorage.getItem('theme') || 'dark';
     let currentLang = localStorage.getItem('lang') || 'en';
+    let currentObjectUrl = null;
 
     // Set defaults if not present
     if (!localStorage.getItem('theme')) localStorage.setItem('theme', 'dark');
@@ -238,8 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchcode() {
         const text = elements.qrtxt.value.trim();
         if (!text) {
+            if (currentObjectUrl) {
+                URL.revokeObjectURL(currentObjectUrl);
+                currentObjectUrl = null;
+            }
             elements.qrimg.classList.add('d-none');
-            elements.qrimg.src = "";
+            elements.qrimg.removeAttribute('src');
             elements.qrPlaceholder.classList.remove('d-none');
             return;
         }
@@ -259,7 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/qr', { method: 'POST', body: formData });
             if (response.ok) {
                 const blob = await response.blob();
-                elements.qrimg.src = URL.createObjectURL(blob);
+                if (currentObjectUrl) {
+                    URL.revokeObjectURL(currentObjectUrl);
+                }
+                currentObjectUrl = URL.createObjectURL(blob);
+                elements.qrimg.src = currentObjectUrl;
                 elements.qrimg.classList.remove('d-none');
                 elements.qrPlaceholder.classList.add('d-none');
             }

@@ -8,14 +8,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-ADD requirements.txt /
+COPY requirements.txt /requirements.txt
 
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r /requirements.txt \
     && rm /requirements.txt
 
-ADD app /app/
+RUN groupadd --system appgroup && useradd --system --gid appgroup --create-home appuser
+
+COPY --chown=appuser:appgroup app /app/
 WORKDIR /app
+
+USER appuser
 
 EXPOSE 3000
 
